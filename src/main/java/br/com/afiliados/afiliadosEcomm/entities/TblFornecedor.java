@@ -1,7 +1,6 @@
 package br.com.afiliados.afiliadosEcomm.entities;
 
-import br.com.afiliados.afiliadosEcomm.dto.TblFornecedorDTO;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,38 +23,9 @@ public class TblFornecedor {
 
     @Column(name="data")
     @CreationTimestamp
+    @JsonIgnore
     private Date data;
 
     @Column(name="ativo")
     private Boolean ativo;
-
-    public TblFornecedor (TblFornecedorDTO tblFornecedorDTO){
-        this.idFornecedor = tblFornecedorDTO.getIdFornecedor();
-        this.data = tblFornecedorDTO.getData();
-        this.ativo = tblFornecedorDTO.getAtivo();
-    }
-
-    public Integer getIdFornecedor() {
-        return idFornecedor;
-    }
-
-    public void setIdFornecedor(Integer idFornecedor) {
-        this.idFornecedor = idFornecedor;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
-    }
 }
