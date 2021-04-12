@@ -41,7 +41,12 @@ public class TblFornecedorController {
     }
 
     @PutMapping("/{idFornecedor}")
+<<<<<<< HEAD
     public ResponseEntity<Integer> atualizarFornecedor( @RequestBody TblFornecedor fornecedor){
+=======
+    public ResponseEntity<Integer> atualizarFornecedor(@PathVariable(name="id") Integer id, @RequestBody TblFornecedor fornecedor){
+        fornecedor.setIdFornecedor(id);
+>>>>>>> 10007257c96e1efd68913e70126d6a0b5949d34d
         TblFornecedor tblFornecedor = fornecedorService.atualizaFornecedor(fornecedor);
         return ResponseEntity.status(HttpStatus.OK).body(tblFornecedor.getIdFornecedor());
     }
