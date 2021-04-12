@@ -17,25 +17,25 @@ public class TblFornecedorController {
     @Autowired
     TblFornecedorService fornecedorService;
 
-    @GetMapping("/buscaFornecedor")
+    @GetMapping
     public ResponseEntity<List<TblFornecedorDTO>> buscaFornecedor(){
         List<TblFornecedorDTO> lista = fornecedorService.buscaFornecedor();
         return ResponseEntity.ok().body(lista);
     }
 
-    @PostMapping("/novoFornecedor")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TblFornecedor criaFonecedor(@RequestBody TblFornecedor fornecedor){
         return fornecedorService.criaForncedor(fornecedor);
     }
 
-    @DeleteMapping(value = "/deletarFornecedor/{idFornecedor}")
+    @DeleteMapping(value = "/{idFornecedor}")
     public ResponseEntity<TblFornecedor> deletarFornecedor(@PathVariable("idFornecedor") Integer idFornecedor){
         fornecedorService.deletaFornecedor(idFornecedor);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PutMapping("/{idFornecedor}/atualizarFornecedor")
+    @PutMapping("/{idFornecedor}")
     public ResponseEntity<Integer> atualizarFornecedor(@PathVariable(name="id") Integer id, @RequestBody TblFornecedor fornecedor){
         fornecedor.setIdFornecedor(id);
         TblFornecedor tblFornecedor = fornecedorService.atualizaFornecedor(fornecedor);
