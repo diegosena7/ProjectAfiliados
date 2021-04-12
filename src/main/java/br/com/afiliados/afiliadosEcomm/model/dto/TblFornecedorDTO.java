@@ -1,6 +1,6 @@
-package br.com.afiliados.afiliadosEcomm.dto;
+package br.com.afiliados.afiliadosEcomm.model.dto;
 
-import br.com.afiliados.afiliadosEcomm.entities.TblFornecedor;
+import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import lombok.Data;
 
 import java.io.Serializable;

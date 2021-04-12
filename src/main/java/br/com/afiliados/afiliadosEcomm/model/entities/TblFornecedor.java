@@ -1,4 +1,4 @@
-package br.com.afiliados.afiliadosEcomm.entities;
+package br.com.afiliados.afiliadosEcomm.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
