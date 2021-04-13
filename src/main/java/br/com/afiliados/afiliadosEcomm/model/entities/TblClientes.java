@@ -7,18 +7,22 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Nesta classe estamos mapeando a entidade para fazer o relacionamento com o idProdutos
+ */
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="tblClientes")
-public class TblClientes {
+public class TblClientes implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCLiente;
+    private Integer idCliente;
 
     private String nomeCliente;
 
@@ -33,5 +37,6 @@ public class TblClientes {
     private Boolean ativo;
 
 //    @OneToMany(mappedBy = "idProdutos")
-//    private Integer idProdutos;
+//    @JoinTable(name = "idProdutos")
+//    private TblProdutos idProdutos;
 }

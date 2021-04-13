@@ -4,7 +4,6 @@ import br.com.afiliados.afiliadosEcomm.model.dto.TblFornecedorDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import br.com.afiliados.afiliadosEcomm.repositories.TblFornecedorRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

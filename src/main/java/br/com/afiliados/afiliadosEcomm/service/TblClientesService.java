@@ -25,4 +25,13 @@ public class TblClientesService {
         List<TblClientes> lista = clientesRepository.findAll();
         return lista.stream().map(cliente -> new TblClientesDTO(cliente)).collect(Collectors.toList());
     }
+
+    /**
+     * Método responsável por inserir um cliente na base de dados
+     * @param tblClientes
+     * @return
+     */
+    public TblClientes inseriCliente(TblClientes tblClientes){
+        return clientesRepository.save(tblClientes);
+    }
 }
