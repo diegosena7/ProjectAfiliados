@@ -32,4 +32,10 @@ public class TblClientesController {
     public TblClientes inseriCliente(@RequestBody TblClientes tblClientes){
         return clientesService.inseriCliente(tblClientes);
     }
+
+    @DeleteMapping(value = "/{idCliente}")
+    public ResponseEntity<TblClientes> deleteCliente(@PathVariable("idCliente") Integer idCliente){
+        clientesService.deleteCliente(idCliente);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

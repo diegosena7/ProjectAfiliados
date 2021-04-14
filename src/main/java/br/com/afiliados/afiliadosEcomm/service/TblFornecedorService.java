@@ -41,7 +41,7 @@ public class TblFornecedorService {
    }
 
     /**
-     * Método responspavel por deletar um forncedor do BD
+     * Método responspavel por deletar um forncedor do BD através do id
      * @param idFornecedor
      */
    public void deletaFornecedor(Integer idFornecedor){

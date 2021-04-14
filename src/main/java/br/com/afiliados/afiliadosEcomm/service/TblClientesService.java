@@ -34,4 +34,12 @@ public class TblClientesService {
     public TblClientes inseriCliente(TblClientes tblClientes){
         return clientesRepository.save(tblClientes);
     }
+
+    /**
+     * Método responsável por excluir um cliente do BD através do id
+     * @param idCliente
+     */
+    public void deleteCliente(Integer idCliente){
+        clientesRepository.deleteById(idCliente);
+    }
 }
