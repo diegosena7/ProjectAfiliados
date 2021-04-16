@@ -21,6 +21,7 @@ public class TblClientesDTO {
     private Date data;
     private Boolean ativo;
 
+    //Constutor com parâmetros da Entity
     public TblClientesDTO(TblClientes cliente) {
         this.idCliente = cliente.getIdCliente();
         this.nomeCliente = cliente.getNomeCliente();
