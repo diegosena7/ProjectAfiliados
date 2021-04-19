@@ -9,18 +9,22 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TblAfiliadosDTO {
+public class TblAfiliadosDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer idAfiliado;
     private String nomeAfiliado;
     private Date data;
     private Boolean ativo;
 
+    //Construtor com parâmetros da Entity
     public TblAfiliadosDTO(TblAfiliados afiliados) {
         this.idAfiliado = afiliados.getIdAfiliado();
         this.nomeAfiliado = afiliados.getNomeAfiliado();

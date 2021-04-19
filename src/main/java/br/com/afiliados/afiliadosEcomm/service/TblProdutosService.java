@@ -1,6 +1,7 @@
 package br.com.afiliados.afiliadosEcomm.service;
 
 import br.com.afiliados.afiliadosEcomm.model.dto.TblProdutosDTO;
+import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblProdutos;
 import br.com.afiliados.afiliadosEcomm.repositories.TblProdutosRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,20 @@ public class TblProdutosService {
         return listaProdutos.stream().map(produto -> new TblProdutosDTO(produto)).collect(Collectors.toList());
     }
 
+    /**
+     * Método responsável por inserir um produto na base de dados
+     * @param tblProdutos
+     * @return
+     */
+    public TblProdutos inserirProduto(TblProdutos tblProdutos){
+        return produtosRepository.save(tblProdutos);
+    }
 
-
+    /**
+     * Método responsável por excluir um produto do BD através do id
+     * @param idProduto
+     */
+    public void deleteProduto(Integer idProduto){
+        produtosRepository.deleteById(idProduto);
+    }
 }

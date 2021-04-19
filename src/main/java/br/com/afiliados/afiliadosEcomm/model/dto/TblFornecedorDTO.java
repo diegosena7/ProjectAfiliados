@@ -19,6 +19,7 @@ public class TblFornecedorDTO implements Serializable {
     private Date data;
     private Boolean ativo;
 
+    //Construtor com parâmetros da Entity
     public TblFornecedorDTO (TblFornecedor fornecedor){
         this.idFornecedor = fornecedor.getIdFornecedor();
         this.data = fornecedor.getData();
