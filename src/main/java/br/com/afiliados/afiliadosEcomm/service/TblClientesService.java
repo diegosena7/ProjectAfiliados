@@ -1,6 +1,7 @@
 package br.com.afiliados.afiliadosEcomm.service;
 
 import br.com.afiliados.afiliadosEcomm.model.dto.TblClientesDTO;
+import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblClientes;
 import br.com.afiliados.afiliadosEcomm.repositories.TblClientesRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +42,14 @@ public class TblClientesService {
      */
     public void deleteCliente(Integer idCliente){
         clientesRepository.deleteById(idCliente);
+    }
+
+    /**
+     * Método responsável por atualizar um cliente
+     * @param clientes
+     * @return
+     */
+    public TblClientes atualizaCliente(TblClientes clientes){
+        return clientesRepository.save(clientes);
     }
 }

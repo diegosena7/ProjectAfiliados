@@ -2,7 +2,6 @@ package br.com.afiliados.afiliadosEcomm.service;
 
 import br.com.afiliados.afiliadosEcomm.model.dto.TblAfiliadosDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
-import br.com.afiliados.afiliadosEcomm.model.entities.TblClientes;
 import br.com.afiliados.afiliadosEcomm.repositories.TblAfiliadosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class TblAfiliadosService {
      * Método responsável por buscar os afiliados, através do método findAll da Classe TblAfiliadosRepository
      * @return litsa de afiliados
      */
-    public List<TblAfiliadosDTO> buscarAfiliados(){
+    public List<TblAfiliadosDTO> buscarAfiliados() {
         List<TblAfiliados> afiliados = afiliadosRepository.findAll();
         return afiliados.stream().map(afiliado -> new TblAfiliadosDTO(afiliado)).collect(Collectors.toList());
     }
@@ -30,7 +29,7 @@ public class TblAfiliadosService {
      * @param tblAfiliados
      * @return
      */
-    public TblAfiliados inserirAfiliados(TblAfiliados tblAfiliados){
+    public TblAfiliados inserirAfiliados(TblAfiliados tblAfiliados) {
         return afiliadosRepository.save(tblAfiliados);
     }
 
@@ -38,7 +37,16 @@ public class TblAfiliadosService {
      * Método responsável por excluir um afiliado do BD através do id
      * @param idAfiliado
      */
-    public void deleteCliente(Integer idAfiliado){
+    public void deleteCliente(Integer idAfiliado) {
         afiliadosRepository.deleteById(idAfiliado);
+    }
+
+    /**
+     * Método responsável por atualizar o objeto do tipo TblAfiliados
+     * @param tblAfiliados
+     * @return
+     */
+    public TblAfiliados atualizarAfiliado(TblAfiliados tblAfiliados) {
+        return afiliadosRepository.save(tblAfiliados);
     }
 }
