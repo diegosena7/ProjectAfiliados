@@ -4,6 +4,8 @@ import br.com.afiliados.afiliadosEcomm.model.dto.TblAfiliadosDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.repositories.TblAfiliadosRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class TblAfiliadosService {
 
     /**
      * Método responsável por buscar os afiliados, através do método findAll da Classe TblAfiliadosRepository
+     *
      * @return litsa de afiliados
      */
     public List<TblAfiliadosDTO> buscarAfiliados() {
@@ -26,6 +29,7 @@ public class TblAfiliadosService {
 
     /**
      * Método responsável por inserir um afiliado na base de dados
+     *
      * @param tblAfiliados
      * @return
      */
@@ -35,14 +39,16 @@ public class TblAfiliadosService {
 
     /**
      * Método responsável por excluir um afiliado do BD através do id
+     *
      * @param idAfiliado
      */
-    public void deleteCliente(Integer idAfiliado) {
+    public void deletarAfiliado(Integer idAfiliado) {
         afiliadosRepository.deleteById(idAfiliado);
     }
 
     /**
      * Método responsável por atualizar o objeto do tipo TblAfiliados
+     *
      * @param tblAfiliados
      * @return
      */

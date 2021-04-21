@@ -1,10 +1,7 @@
 package br.com.afiliados.afiliadosEcomm.controller;
 
 import br.com.afiliados.afiliadosEcomm.model.dto.TblAfiliadosDTO;
-import br.com.afiliados.afiliadosEcomm.model.dto.TblClientesDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
-import br.com.afiliados.afiliadosEcomm.model.entities.TblClientes;
-import br.com.afiliados.afiliadosEcomm.model.entities.TblProdutos;
 import br.com.afiliados.afiliadosEcomm.repositories.TblAfiliadosRepository;
 import br.com.afiliados.afiliadosEcomm.service.TblAfiliadosService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -36,13 +32,13 @@ public class TblAfiliadosController {
     }
 
     @DeleteMapping(value = "/{idAfiliado}")
-    public ResponseEntity<TblAfiliados> deleteAfiliado(@PathVariable("idAfiliado") Integer idAfiliado){
-        afiliadosService.deleteCliente(idAfiliado);
+    public ResponseEntity<TblAfiliados> deleteAfiliado(@PathVariable("idAfiliado") Integer idAfiliado) {
+        afiliadosService.deletarAfiliado(idAfiliado);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{idAfiliado}")
-    public ResponseEntity atualizarAfiliado(@PathVariable("idAfiliado") Integer idAfiliado, @RequestBody TblAfiliados afiliados){
+    public ResponseEntity atualizarAfiliado(@PathVariable("idAfiliado") Integer idAfiliado, @RequestBody TblAfiliados afiliados) {
         return afiliadosRepository.findById(idAfiliado).map(
                 dados -> {
                     dados.setNomeAfiliado(afiliados.getNomeAfiliado());
