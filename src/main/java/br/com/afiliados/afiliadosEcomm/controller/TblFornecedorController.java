@@ -30,6 +30,11 @@ public class TblFornecedorController {
         return ResponseEntity.ok().body(lista);
     }
 
+    @GetMapping("{idFornecedor}")
+    public ResponseEntity buscaFornecedorPorId(@PathVariable("idFornecedor") Integer idFornecedor) {
+        return ResponseEntity.ok().body(fornecedorService.bucarFornecedorPorId(idFornecedor));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TblFornecedor criaFonecedor(@RequestBody TblFornecedor fornecedor) {

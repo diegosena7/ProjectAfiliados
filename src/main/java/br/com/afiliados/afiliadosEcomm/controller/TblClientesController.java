@@ -28,6 +28,11 @@ public class TblClientesController {
         return ResponseEntity.ok().body(lista);
     }
 
+    @GetMapping("{idCliente}")
+    public ResponseEntity buscarAfiliadoPorId(@PathVariable("idCliente") Integer idCliente) {
+        return ResponseEntity.ok().body(clientesService.buscarClientePorId(idCliente));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TblClientes inseriCliente(@RequestBody TblClientes tblClientes){

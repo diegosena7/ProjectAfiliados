@@ -26,6 +26,11 @@ public class TblProdutosController {
         return ResponseEntity.ok().body(listaProdutos);
     }
 
+    @GetMapping("{idProduto}")
+    public ResponseEntity buscaProdutoPorId(@PathVariable("idProduto") Integer idProduto){
+        return ResponseEntity.ok().body(produtosService.buscaProdutoPorId(idProduto));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TblProdutos inserirProduto(@RequestBody TblProdutos tblProdutos){

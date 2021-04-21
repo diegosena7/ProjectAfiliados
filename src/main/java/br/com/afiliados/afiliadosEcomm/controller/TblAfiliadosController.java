@@ -1,5 +1,6 @@
 package br.com.afiliados.afiliadosEcomm.controller;
 
+import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
 import br.com.afiliados.afiliadosEcomm.model.dto.TblAfiliadosDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.repositories.TblAfiliadosRepository;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.math.BigInteger;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,6 +28,11 @@ public class TblAfiliadosController {
         return ResponseEntity.ok().body(afiliadosDTOS);
     }
 
+    @GetMapping("{idAfiliado}")
+    public ResponseEntity buscarAfiliadoPorId(@PathVariable("idAfiliado") Integer idAfiliado) {
+        return ResponseEntity.ok().body(afiliadosService.buscarAfiliadoPorId(idAfiliado));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TblAfiliados inserirAfiliados(@RequestBody TblAfiliados tblAfiliados) {
@@ -38,13 +46,14 @@ public class TblAfiliadosController {
     }
 
     @PutMapping("/{idAfiliado}")
-    public ResponseEntity atualizarAfiliado(@PathVariable("idAfiliado") Integer idAfiliado, @RequestBody TblAfiliados afiliados) {
+    public ResponseEntity atualizarAfiliado(@PathVariable("idAfiliado") Integer idAfiliado, @RequestBody @Valid TblAfiliados afiliados) {
         return afiliadosRepository.findById(idAfiliado).map(
                 dados -> {
                     dados.setNomeAfiliado(afiliados.getNomeAfiliado());
                     dados.setAtivo(afiliados.getAtivo());
                     TblAfiliados tblAfiliados = afiliadosRepository.save(dados);
                     return ResponseEntity.ok().body(tblAfiliados);
-                }).orElse(ResponseEntity.notFound().build());
+                }).orElseThrow(() -> new ObjectNotFoundException("Id: " + idAfiliado + " não encontrado para atualizar usuário." + " tipo: "
+                + TblAfiliados.class.getName()));
     }
 }

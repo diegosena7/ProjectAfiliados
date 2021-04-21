@@ -1,5 +1,6 @@
 package br.com.afiliados.afiliadosEcomm.service;
 
+import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
 import br.com.afiliados.afiliadosEcomm.model.dto.TblFornecedorDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import br.com.afiliados.afiliadosEcomm.repositories.TblFornecedorRepository;
@@ -29,6 +30,17 @@ public class TblFornecedorService {
     public List<TblFornecedorDTO> buscaFornecedor(){
         List<TblFornecedor> lista = fornecedorRepository.findAll();
         return lista.stream().map(forn -> new TblFornecedorDTO(forn)).collect(Collectors.toList());
+    }
+
+    /**
+     * Método responsável por fazer a busca de um afiliado através do id
+     * @param idCliente
+     * @return
+     * @throws ObjectNotFoundException
+     */
+    public TblFornecedor bucarFornecedorPorId(Integer idCliente)throws ObjectNotFoundException {
+        return fornecedorRepository.findById(idCliente).orElseThrow(()-> new ObjectNotFoundException(
+                "O afiliado para o id: " + idCliente + " não foi localizado."));
     }
 
     /**

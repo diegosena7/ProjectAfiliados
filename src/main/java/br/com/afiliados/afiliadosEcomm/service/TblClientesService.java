@@ -1,5 +1,6 @@
 package br.com.afiliados.afiliadosEcomm.service;
 
+import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
 import br.com.afiliados.afiliadosEcomm.model.dto.TblClientesDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblClientes;
@@ -25,6 +26,17 @@ public class TblClientesService {
     public List<TblClientesDTO> buscaClientes(){
         List<TblClientes> lista = clientesRepository.findAll();
         return lista.stream().map(cliente -> new TblClientesDTO(cliente)).collect(Collectors.toList());
+    }
+
+    /**
+     * Método responsável por fazer a busca de um afiliado através do id
+     * @param idCliente
+     * @return
+     * @throws ObjectNotFoundException
+     */
+    public TblClientes buscarClientePorId(Integer idCliente) throws ObjectNotFoundException {
+        return clientesRepository.findById(idCliente).orElseThrow(() -> new ObjectNotFoundException
+                ("O afiliado para o id: " + idCliente + " não foi localizado."));
     }
 
     /**

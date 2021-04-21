@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -21,6 +22,7 @@ public class TblAfiliados {
     @Column(name = "idAfiliado")
     private Integer idAfiliado;
 
+    @NotBlank//Nome não pode ser vazio
     @Column(name = "nomeAfiliado")
     private String nomeAfiliado;
 

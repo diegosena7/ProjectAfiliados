@@ -1,11 +1,10 @@
 package br.com.afiliados.afiliadosEcomm.service;
 
+import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
 import br.com.afiliados.afiliadosEcomm.model.dto.TblAfiliadosDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.repositories.TblAfiliadosRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +18,22 @@ public class TblAfiliadosService {
 
     /**
      * Método responsável por buscar os afiliados, através do método findAll da Classe TblAfiliadosRepository
-     *
      * @return litsa de afiliados
      */
     public List<TblAfiliadosDTO> buscarAfiliados() {
         List<TblAfiliados> afiliados = afiliadosRepository.findAll();
         return afiliados.stream().map(afiliado -> new TblAfiliadosDTO(afiliado)).collect(Collectors.toList());
+    }
+
+    /**
+     * Método responsável por fazer a busca de um afiliado através do id
+     * @param idAfiliado
+     * @return
+     * @throws ObjectNotFoundException
+     */
+    public TblAfiliados buscarAfiliadoPorId(Integer idAfiliado) throws ObjectNotFoundException{
+            return afiliadosRepository.findById(idAfiliado).orElseThrow(() -> new ObjectNotFoundException
+                    ("O afiliado para o id: " + idAfiliado + " não foi localizado."));
     }
 
     /**
@@ -43,7 +52,9 @@ public class TblAfiliadosService {
      * @param idAfiliado
      */
     public void deletarAfiliado(Integer idAfiliado) {
-        afiliadosRepository.deleteById(idAfiliado);
+        if (idAfiliado != null){
+            afiliadosRepository.deleteById(idAfiliado);
+        }
     }
 
     /**
