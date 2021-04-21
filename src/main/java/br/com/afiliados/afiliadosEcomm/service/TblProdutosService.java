@@ -51,11 +51,12 @@ public class TblProdutosService {
      * @param idProduto
      */
     public void deleteProduto(Integer idProduto){
-        produtosRepository.deleteById(idProduto);
+        if (idProduto != null){
+            produtosRepository.deleteById(idProduto);
+        }
     }
 
     public TblProdutos atualizaFornecedor(TblProdutos produtos){
         return produtosRepository.save(produtos);
-//        return fornecedorRepository.getFornecedor();
     }
 }

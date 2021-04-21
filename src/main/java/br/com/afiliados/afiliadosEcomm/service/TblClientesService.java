@@ -53,7 +53,9 @@ public class TblClientesService {
      * @param idCliente
      */
     public void deleteCliente(Integer idCliente){
-        clientesRepository.deleteById(idCliente);
+        if (idCliente != null){
+            clientesRepository.deleteById(idCliente);
+        }
     }
 
     /**

@@ -57,7 +57,9 @@ public class TblFornecedorService {
      * @param idFornecedor
      */
    public void deletaFornecedor(Integer idFornecedor){
-        fornecedorRepository.deleteById(idFornecedor);
+        if (idFornecedor != null){
+            fornecedorRepository.deleteById(idFornecedor);
+        }
    }
 
     /**
@@ -67,6 +69,5 @@ public class TblFornecedorService {
      */
     public TblFornecedor atualizaFornecedor(TblFornecedor fornecedor){
         return fornecedorRepository.save(fornecedor);
-//        return fornecedorRepository.getFornecedor();
     }
 }

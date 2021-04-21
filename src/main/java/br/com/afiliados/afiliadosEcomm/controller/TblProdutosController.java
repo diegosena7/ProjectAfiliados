@@ -1,6 +1,8 @@
 package br.com.afiliados.afiliadosEcomm.controller;
 
+import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
 import br.com.afiliados.afiliadosEcomm.model.dto.TblProdutosDTO;
+import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblProdutos;
 import br.com.afiliados.afiliadosEcomm.repositories.TblProdutosRepository;
@@ -44,8 +46,8 @@ public class TblProdutosController {
     }
 
     @PutMapping("/{idFornecedor}")
-    public ResponseEntity atualizarFornecedor(@PathVariable("idFornecedor") Integer idFornecedor, @RequestBody TblProdutos produtos){
-        return produtosRepository.findById(idFornecedor).map(
+    public ResponseEntity atualizarProduto(@PathVariable("idProduto") Integer idProduto, @RequestBody TblProdutos produtos){
+        return produtosRepository.findById(idProduto).map(
                 dados -> {
                     dados.setIdProdutoPlataforma(produtos.getIdProdutoPlataforma());
                     dados.setNomeProduto(produtos.getNomeProduto());
@@ -58,6 +60,7 @@ public class TblProdutosController {
                     dados.setAtivo(produtos.getAtivo());
                     TblProdutos tblProdutos = produtosRepository.save(dados);
                     return ResponseEntity.ok().body(tblProdutos);
-                }).orElse(ResponseEntity.notFound().build());
+                }).orElseThrow(() -> new ObjectNotFoundException("Id: " + idProduto + " não encontrado para atualizar produto." + " tipo: "
+                + TblAfiliados.class.getName()));
     }
 }

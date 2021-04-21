@@ -1,6 +1,8 @@
 package br.com.afiliados.afiliadosEcomm.controller;
 
+import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
 import br.com.afiliados.afiliadosEcomm.model.dto.TblFornecedorDTO;
+import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblClientes;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import br.com.afiliados.afiliadosEcomm.repositories.TblFornecedorRepository;
@@ -54,6 +56,7 @@ public class TblFornecedorController {
                     dados.setAtivo(fornecedor.getAtivo());
                     TblFornecedor tblFornecedor = fornecedorRepository.save(dados);
                     return ResponseEntity.ok().body(tblFornecedor);
-                }).orElse(ResponseEntity.notFound().build());
+                }).orElseThrow(() -> new ObjectNotFoundException("Id: " + idFornecedor + " não encontrado para atualizar fornecedor." + " tipo: "
+                + TblAfiliados.class.getName()));
     }
 }
