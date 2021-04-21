@@ -50,10 +50,11 @@ public class TblFornecedorService {
 
     /**
      * Método responsável por atualizar um fornecedor
-     * @param fornecedor
+     * @param
      * @return
      */
     public TblFornecedor atualizaFornecedor(TblFornecedor fornecedor){
         return fornecedorRepository.save(fornecedor);
+//        return fornecedorRepository.getFornecedor();
     }
 }

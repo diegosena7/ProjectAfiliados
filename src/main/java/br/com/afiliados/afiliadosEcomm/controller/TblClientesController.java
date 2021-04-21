@@ -1,6 +1,7 @@
 package br.com.afiliados.afiliadosEcomm.controller;
 
 import br.com.afiliados.afiliadosEcomm.model.dto.TblClientesDTO;
+import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblClientes;
 import br.com.afiliados.afiliadosEcomm.service.TblClientesService;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,12 @@ public class TblClientesController {
     public ResponseEntity<TblClientes> deleteCliente(@PathVariable("idCliente") Integer idCliente){
         clientesService.deleteCliente(idCliente);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PutMapping("/{idCliente}")
+    public ResponseEntity<Integer> atualizarCliente(@PathVariable("idCliente") Integer idCliente, @RequestBody TblClientes clientes){
+        clientes.setIdCliente(idCliente);
+        TblClientes clinteAtualizado = clientesService.atualizaCliente(clientes);
+        return ResponseEntity.status(HttpStatus.OK).body(clinteAtualizado.getIdCliente());
     }
 }

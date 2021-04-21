@@ -2,6 +2,7 @@ package br.com.afiliados.afiliadosEcomm.service;
 
 import br.com.afiliados.afiliadosEcomm.model.dto.TblProdutosDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
+import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblProdutos;
 import br.com.afiliados.afiliadosEcomm.repositories.TblProdutosRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,10 @@ public class TblProdutosService {
      */
     public void deleteProduto(Integer idProduto){
         produtosRepository.deleteById(idProduto);
+    }
+
+    public TblProdutos atualizaFornecedor(TblProdutos produtos){
+        return produtosRepository.save(produtos);
+//        return fornecedorRepository.getFornecedor();
     }
 }

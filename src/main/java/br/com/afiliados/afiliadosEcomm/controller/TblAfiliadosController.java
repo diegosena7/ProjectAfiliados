@@ -42,9 +42,13 @@ public class TblAfiliadosController {
     }
 
     @PutMapping("/{idAfiliado}")
-    public ResponseEntity<Integer> atualizarAfiliado(@PathVariable("idAfiliado") Integer idAfiliado, @RequestBody TblAfiliados afiliados){
-       afiliados.setIdAfiliado(idAfiliado);
-       TblAfiliados afiliadoReturn = afiliadosService.atualizarAfiliado(afiliados);
-       return ResponseEntity.status(HttpStatus.OK).body(afiliadoReturn.getIdAfiliado());
+    public ResponseEntity atualizarAfiliado(@PathVariable("idAfiliado") Integer idAfiliado, @RequestBody TblAfiliados afiliados){
+        return afiliadosRepository.findById(idAfiliado).map(
+                dados -> {
+                    dados.setNomeAfiliado(afiliados.getNomeAfiliado());
+                    dados.setAtivo(afiliados.getAtivo());
+                    TblAfiliados tblAfiliados = afiliadosRepository.save(dados);
+                    return ResponseEntity.ok().body(tblAfiliados);
+                }).orElse(ResponseEntity.notFound().build());
     }
 }
