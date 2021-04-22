@@ -34,13 +34,13 @@ public class TblFornecedorService {
 
     /**
      * Método responsável por fazer a busca de um afiliado através do id
-     * @param idCliente
+     * @param idFornecedor
      * @return
      * @throws ObjectNotFoundException
      */
-    public TblFornecedor bucarFornecedorPorId(Integer idCliente)throws ObjectNotFoundException {
-        return fornecedorRepository.findById(idCliente).orElseThrow(()-> new ObjectNotFoundException(
-                "O afiliado para o id: " + idCliente + " não foi localizado."));
+    public TblFornecedor bucarFornecedorPorId(Integer idFornecedor)throws ObjectNotFoundException {
+        return fornecedorRepository.findById(idFornecedor).orElseThrow(()-> new ObjectNotFoundException(
+                "O fornecedor para o id: " + idFornecedor + " não foi localizado."));
     }
 
     /**

@@ -34,7 +34,7 @@ public class TblProdutosService {
      */
     public TblProdutos buscaProdutoPorId(Integer idProduto) throws ObjectNotFoundException{
         return produtosRepository.findById(idProduto).orElseThrow(() -> new ObjectNotFoundException
-                ("O afiliado para o id: " + idProduto + " não foi localizado."));
+                ("O produto para o id: " + idProduto + " não foi localizado."));
     }
 
     /**

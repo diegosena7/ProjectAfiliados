@@ -1,19 +1,23 @@
 package br.com.afiliados.afiliadosEcomm.controller;
 
 import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
-import br.com.afiliados.afiliadosEcomm.model.dto.TblProdutosDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
-import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblProdutos;
 import br.com.afiliados.afiliadosEcomm.repositories.TblProdutosRepository;
 import br.com.afiliados.afiliadosEcomm.service.TblProdutosService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+/**
+ * Nesta classe estamos injetando a dependencia no objeto fornecedorService através da anotação @RequiredArgsConstructor
+ * esta anotação gera um construtor com 1 parâmetro para cada campo.
+ * E estamos trabalhando com o tipo Page no método de busca para poder  ter uma ordenação de itens por páginas, onde a
+ * qtidade de itens por página é de 20 itens.
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/produtos")
@@ -23,8 +27,8 @@ public class TblProdutosController {
     final TblProdutosRepository produtosRepository;
 
     @GetMapping
-    public ResponseEntity<List<TblProdutosDTO>> buscaProdutos(){
-        List<TblProdutosDTO> listaProdutos = produtosService.buscaProdutos();
+    public ResponseEntity<Page<TblProdutos>> buscaProdutos(Pageable pageable){
+        Page<TblProdutos> listaProdutos = produtosRepository.findAll(pageable);
         return ResponseEntity.ok().body(listaProdutos);
     }
 

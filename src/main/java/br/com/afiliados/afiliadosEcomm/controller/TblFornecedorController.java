@@ -8,6 +8,8 @@ import br.com.afiliados.afiliadosEcomm.model.entities.TblFornecedor;
 import br.com.afiliados.afiliadosEcomm.repositories.TblFornecedorRepository;
 import br.com.afiliados.afiliadosEcomm.service.TblFornecedorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,9 @@ import java.util.List;
 
 /**
  * Nesta classe estamos injetando a dependencia no objeto fornecedorService através da anotação @RequiredArgsConstructor
- * esta anotação gera um construtor com 1 parâmetro para cada campo que requer tratamento especial.
+ * esta anotação gera um construtor com 1 parâmetro para cada campo.
+ * E estamos trabalhando com o tipo Page no método de busca para poder  ter uma ordenação de itens por páginas, onde a
+ * qtidade de itens por página é de 20 itens.
  */
 @RequiredArgsConstructor
 @RestController
@@ -27,8 +31,8 @@ public class TblFornecedorController {
     final TblFornecedorRepository fornecedorRepository;
 
     @GetMapping
-    public ResponseEntity<List<TblFornecedorDTO>> buscaFornecedor() {
-        List<TblFornecedorDTO> lista = fornecedorService.buscaFornecedor();
+    public ResponseEntity<Page<TblFornecedor>> buscaFornecedor(Pageable pageable) {
+        Page<TblFornecedor> lista = fornecedorRepository.findAll(pageable);
         return ResponseEntity.ok().body(lista);
     }
 

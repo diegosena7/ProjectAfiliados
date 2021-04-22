@@ -36,7 +36,7 @@ public class TblClientesService {
      */
     public TblClientes buscarClientePorId(Integer idCliente) throws ObjectNotFoundException {
         return clientesRepository.findById(idCliente).orElseThrow(() -> new ObjectNotFoundException
-                ("O afiliado para o id: " + idCliente + " não foi localizado."));
+                ("O cliente para o id: " + idCliente + " não foi localizado."));
     }
 
     /**

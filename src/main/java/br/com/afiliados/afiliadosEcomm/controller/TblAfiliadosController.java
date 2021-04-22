@@ -1,19 +1,23 @@
 package br.com.afiliados.afiliadosEcomm.controller;
 
 import br.com.afiliados.afiliadosEcomm.exceptions.ObjectNotFoundException;
-import br.com.afiliados.afiliadosEcomm.model.dto.TblAfiliadosDTO;
 import br.com.afiliados.afiliadosEcomm.model.entities.TblAfiliados;
 import br.com.afiliados.afiliadosEcomm.repositories.TblAfiliadosRepository;
 import br.com.afiliados.afiliadosEcomm.service.TblAfiliadosService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.math.BigInteger;
-import java.util.List;
 
+/**
+ * Nesta classe estamos injetando a dependencia no objeto fornecedorService através da anotação @RequiredArgsConstructor
+ * esta anotação gera um construtor com 1 parâmetro para cada campo.
+ * E estamos trabalhando com o tipo Page no método de busca para poder  ter uma ordenação de itens por páginas, onde a
+ * qtidade de itens por página é de 20 itens.
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/afiliados")
@@ -23,8 +27,8 @@ public class TblAfiliadosController {
     final TblAfiliadosRepository afiliadosRepository;
 
     @GetMapping
-    public ResponseEntity<List<TblAfiliadosDTO>> buscarAfiliados() {
-        List<TblAfiliadosDTO> afiliadosDTOS = afiliadosService.buscarAfiliados();
+    public ResponseEntity<Page<TblAfiliados>> buscarAfiliados(Pageable pageable) {
+        Page<TblAfiliados> afiliadosDTOS = afiliadosRepository.findAll(pageable);
         return ResponseEntity.ok().body(afiliadosDTOS);
     }
 
